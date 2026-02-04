@@ -939,45 +939,118 @@
 //Шаблонный метод
 /////////////////////////////////////
 
-class Form {
-  constructor(public name: string) {}
+// class Form {
+//   constructor(public name: string) {}
+// }
+
+// abstract class SaveForm<T> {
+//   public save(form: Form) {
+//     const res = this.fill(form);
+//     this.log(res);
+//     this.send(res);
+//   }
+
+//   protected abstract fill(form: Form): T;
+//   protected log(data: T): void {
+//     console.log(data);
+//   }
+
+//   protected abstract send(data: T): void;
+// }
+
+// class FirstAPI extends SaveForm<string> {
+//   protected fill(form: Form): string {
+//     return form.name;
+//   }
+//   protected send(data: string): void {
+//     console.log(`Отправляю ${data}!`);
+//   }
+// }
+
+// class SecondAPI extends SaveForm<{ fio: string }> {
+//   protected fill(form: Form): { fio: string } {
+//     return { fio: form.name };
+//   }
+//   protected send(data: { fio: string }): void {
+//     console.log(`Отправляю ${data}!`);
+//   }
+// }
+
+// const form1 = new FirstAPI();
+// form1.save(new Form('Vasa'));
+
+// const form2 = new SecondAPI();
+// form2.save(new Form('ew qwg'));
+
+//////////////////////////////////////
+//Наблюдатель
+/////////////////////////////////////
+
+interface Observer {
+  update(subject: Subject): void;
 }
 
-abstract class SaveForm<T> {
-  public save(form: Form) {
-    const res = this.fill(form);
-    this.log(res);
-    this.send(res);
-  }
+interface Subject {
+  attach(observer: Observer): void;
+  detach(observer: Observer): void;
 
-  protected abstract fill(form: Form): T;
-  protected log(data: T): void {
-    this.log(data);
-  }
-
-  protected abstract send(data: T): void;
+  notify(): void;
 }
 
-class FirstAPI extends SaveForm<string> {
-  protected fill(form: Form): string {
-    return form.name;
+class Lead {
+  constructor(
+    public name: string,
+    public phone: string,
+  ) {}
+}
+
+class NewLead implements Subject {
+  private observers: Observer[] = [];
+  public state: Lead;
+
+  attach(observer: Observer): void {
+    if (this.observers.includes(observer)) {
+      return;
+    }
+    this.observers.push(observer);
   }
-  protected send(data: string): void {
-    console.log(`Отправляю ${data}!`);
+  detach(observer: Observer): void {
+    const observerIndex = this.observers.indexOf(observer);
+    if (observerIndex == -1) {
+      return;
+    }
+    this.observers.splice(observerIndex, 1);
+  }
+  notify(): void {
+    for (const observer of this.observers) {
+      observer.update(this);
+    }
   }
 }
 
-class SecondAPI extends SaveForm<{ fio: string }> {
-  protected fill(form: Form): { fio: string } {
-    return { fio: form.name };
-  }
-  protected send(data: { fio: string }): void {
-    console.log(`Отправляю ${data}!`);
+class NotifictionService implements Observer {
+  update(subject: Subject): void {
+    console.log(`NotifictionService получил уведомление`);
+    console.log(subject);
   }
 }
 
-const form1 = new FirstAPI();
-form1.save(new Form('Vasa'));
+class LeadService implements Observer {
+  update(subject: Subject): void {
+    console.log(`LeadService получил уведомление`);
+    console.log(subject);
+  }
+}
 
-const form2 = new SecondAPI();
-form2.save(new Form('ew qwg'));
+const subject = new NewLead();
+subject.state = new Lead('Антон', '54247');
+
+const s1 = new NotifictionService();
+const s2 = new LeadService();
+
+subject.attach(s1);
+subject.attach(s2);
+
+subject.notify();
+subject.detach(s1);
+subject.notify();
