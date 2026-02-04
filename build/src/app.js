@@ -672,71 +672,111 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //////////////////////////////////////
 //Iterator
 /////////////////////////////////////
-class Task {
-    priority;
-    constructor(priority) {
-        this.priority = priority;
+// class Task {
+//   constructor(public priority: number) {}
+// }
+// class TasksList {
+//   private tasks: Task[] = [];
+//   public sortByPriority() {
+//     this.tasks = this.tasks.sort((a, b) => {
+//       if (a.priority > b.priority) {
+//         return 1;
+//         // a.priority - b.priority
+//       } else if (a.priority < b.priority) {
+//         return -1;
+//         // b.priority - a.priority;
+//       } else {
+//         return 0;
+//       }
+//     });
+//   }
+//   public addTask(task: Task) {
+//     this.tasks.push(task);
+//   }
+//   public getTask() {
+//     return this.tasks;
+//   }
+//   public count() {
+//     return this.tasks.length;
+//   }
+//   public getIterator() {
+//     return new PriorityTaskIterator(this);
+//   }
+// }
+// interface IIterator<T> {
+//   current(): T | undefined;
+//   next(): T | undefined;
+//   prev(): T | undefined;
+//   index(): number;
+// }
+// class PriorityTaskIterator implements IIterator<Task> {
+//   private position: number = 0;
+//   private taskList: TasksList;
+//   constructor(taskList: TasksList) {
+//     taskList.sortByPriority();
+//     this.taskList = taskList;
+//   }
+//   current(): Task | undefined {
+//     return this.taskList.getTask()[this.position];
+//   }
+//   next(): Task | undefined {
+//     this.position += 1;
+//     return this.taskList.getTask()[this.position];
+//   }
+//   prev(): Task | undefined {
+//     this.position -= 1;
+//     return this.taskList.getTask()[this.position];
+//   }
+//   index(): number {
+//     return this.position;
+//   }
+// }
+// const taskList = new TasksList();
+// taskList.addTask(new Task(8));
+// taskList.addTask(new Task(7));
+// taskList.addTask(new Task(6));
+// const iterator = taskList.getIterator();
+// console.log(iterator.current());
+// console.log(iterator.next());
+// console.log(iterator.next());
+// console.log(iterator.prev());
+// console.log(iterator.index());
+//////////////////////////////////////
+//Шаблонный метод
+/////////////////////////////////////
+class Form {
+    name;
+    constructor(name) {
+        this.name = name;
     }
 }
-class TasksList {
-    tasks = [];
-    sortByPriority() {
-        this.tasks = this.tasks.sort((a, b) => {
-            if (a.priority > b.priority) {
-                return 1;
-                // a.priority - b.priority
-            }
-            else if (a.priority < b.priority) {
-                return -1;
-                // b.priority - a.priority;
-            }
-            else {
-                return 0;
-            }
-        });
+class SaveForm {
+    save(form) {
+        const res = this.fill(form);
+        this.log(res);
+        this.send(res);
     }
-    addTask(task) {
-        this.tasks.push(task);
-    }
-    getTask() {
-        return this.tasks;
-    }
-    count() {
-        return this.tasks.length;
-    }
-    getIterator() {
-        return new PriorityTaskIterator(this);
+    log(data) {
+        this.log(data);
     }
 }
-class PriorityTaskIterator {
-    position = 0;
-    taskList;
-    constructor(taskList) {
-        taskList.sortByPriority();
-        this.taskList = taskList;
+class FirstAPI extends SaveForm {
+    fill(form) {
+        return form.name;
     }
-    current() {
-        return this.taskList.getTask()[this.position];
-    }
-    next() {
-        this.position += 1;
-        return this.taskList.getTask()[this.position];
-    }
-    prev() {
-        this.position -= 1;
-        return this.taskList.getTask()[this.position];
-    }
-    index() {
-        return this.position;
+    send(data) {
+        console.log(`Отправляю ${data}!`);
     }
 }
-const taskList = new TasksList();
-taskList.addTask(new Task(8));
-taskList.addTask(new Task(7));
-taskList.addTask(new Task(6));
-const iterator = taskList.getIterator();
-console.log(iterator.current());
-console.log(iterator.next());
-console.log(iterator.next());
-console.log(iterator.prev());
-console.log(iterator.index());
+class SecondAPI extends SaveForm {
+    fill(form) {
+        return { fio: form.name };
+    }
+    send(data) {
+        console.log(`Отправляю ${data}!`);
+    }
+}
+const form1 = new FirstAPI();
+form1.save(new Form('Vasa'));
+const form2 = new SecondAPI();
+form2.save(new Form('ew qwg'));
