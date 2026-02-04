@@ -1,0 +1,137 @@
+{
+  // Visit https://aka.ms/tsconfig to read more about this file
+  "compilerOptions": {
+    // File Layout
+    // "rootDir": "./src",
+     "outDir": "./build/",
+    
+
+
+    // Environment Settings
+    // See also https://aka.ms/tsconfig/module
+    // // "module": "nodenext",//по стондарту, переопределил ниже в модулях
+    "target": "esnext",//es2016 - у автора
+    "types": [],
+    // For nodejs:
+    // "lib": ["esnext"],
+    // "types": ["node"],
+    // and npm install -D @types/node
+
+    /*Emit!!*/
+    //"outDir": "./build/", //куда будут конвертироваться из ts в js
+    //"outFile": "./",
+    //"removeComments": true,// в осовном js отключаются комменты, оставленные в ts
+    //"noEmit": true,//не эмитить файлы из компеляции
+    // "noEmitHelpers": true, // хэлперы - это доп хэлп фун, импортирующиеся из тс либы
+    // "noEmitOnError": true,//если есть ошибки то ничего не компелируется
+    // "importHelpers": true,// ИМПОРТИРУЕТ 1 раз для всего проекта хэлперы
+    // "noEmitHelpers": true,// хэлеры не будут эмититься 
+    // "importsNotUsedAsValues": "remove", // если есть импорты типов, то мы будем его удалять
+    // "stripInternal": true, // при его включении будет убираться всё после /*@internal*/
+    // "preserveConstEnums": true, // позвол нам конст enum
+
+    // Other Outputs
+    // //"sourceMap": true,//в наши файлы будут добавляться сорс мапы. Между js и ts нет никакой связи. И чтобы увидить ошибки компиляции. Т.е. связыввают js и ts.   
+    // //"declaration": true,//объявление диклорации для контроллера показывает в дтс файле, описывающий тс.
+    // //"declarationMap": true,
+    //
+
+
+
+    // "declarationDir": "./types",// место куда будут складываться делорации
+    // "emitDeclarationOnly": true,// если включить то при сборкее через аутдир, будут созданы только деклорации
+    // "inlineSourceMap": true,// вместо сорс мап файлов добавляется строка в js файл
+    // "inlineSources": true,//
+    // "sourceRoot": "", // это рут деректории в которых нам нужно будет искать сорсы
+    // "mapRoot": "", // это рут деректории в которых нам нужно будет искать мапы
+
+
+    // Stricter Typechecking Options
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noPropertyAccessFromIndexSignature": true,
+
+
+    // Style Options
+    // "noImplicitReturns": true,
+    // "noImplicitOverride": true,
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
+    // "allowUnreachableCode": true,
+    // "noImplicitOverride": true,
+    
+
+    
+    // "noFallthroughCasesInSwitch": true,
+    // "noPropertyAccessFromIndexSignature": true,
+    "strictPropertyInitialization": false,
+
+    // Recommended Options
+    "strict": true,
+    "jsx": "react-jsx",
+    //"verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true,
+
+    // "noImplicitAny": false, //неявное задание any
+    // "strictNullChecks": true,
+    // "strictFunctionTypes": true,
+    // "strictBindCallApply": true,
+    // "noImplicitThis": true,
+    // "useUnknownInCatchVariables": true,
+    // "alwaysStrict": true,
+
+    
+
+    
+
+
+
+    /*Language and environment!! */
+    // "target": "es2016", //выбираем стандарт компеляции
+    // "lib": [], // это нужно для отключения какихто библиотек стандартных по типу DOM, просто в этом списке не указываешь его и он не работает. Л
+    
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true, //при компиляции js добавляются методанные
+    // "jsxFactory": "React.createElement",
+    // "jsxFragmentFactory": "React.Fragment",
+    // "jsxImportSource": "react",
+    // "noLib": true,// отключение доп библиотек
+    // "useDefineForClassFields": true,//позволяет нам включить экмоскриптовский стандарт дефайна поля
+
+    /*Modules*/
+    "module": "commonjs",//
+    //"rootDir": "./src",// это дериктория в которой будут находиться весь наш проект
+   // "baseUrl": "./", // то с помощью чего мы можеми задать стандартный путь резолва модулей
+   // "paths": {
+   //   "@lib": ["./lib/my-lib"],
+   // }
+    //"rootDirs": [], 
+    //"typeRoots": [] // там где лежат типы
+    // "resolveJsonModule": true,
+
+    
+  },
+
+
+
+
+  
+  //какие именно файлы компелируются
+  // "files": [
+  //   "./classi(06)/classi(06).ts"
+  // ]
+
+//компилируются файлы начинающиеся с ...
+//   "include": [
+//     "./**/class*"
+//   ],
+// //компелируется всё кроме
+//   "exclude": [
+//     "App.ts"
+//   ],
+//   //для монорепозиториев
+//   "extends":""
+}

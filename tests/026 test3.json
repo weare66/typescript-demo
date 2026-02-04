@@ -1,0 +1,68 @@
+// Запрос в виде платежа
+{
+	"sum": 10000,
+	"from": 2,
+	"to": 4
+}
+// Ответ
+{
+	"status": "success",
+	"data": {
+		"databaseId": 567,
+		"sum": 10000,
+		"from": 2,
+		"to": 4
+	}
+},
+{
+	"status": "failed",
+	"data": {
+		"errorMessage": "Недостаточно средств",
+		"errorCode": 4
+	}
+}
+
+///////////////////////////
+/////////test3////////////
+///////////////////////////
+
+
+interface ReqServ {
+    sum: number,
+	from: number,
+	to: number,
+}
+
+
+enum StatusCode {
+  SUCCESS = 'success',
+  FAILED = 'failed'
+}
+
+interface IReqServ extends ReqServ {
+}
+
+interface DataSucRes extends IReqServ {
+    databaseId: number;
+   
+}
+
+interface DataFailedRes {
+    errorMessage: string;
+	errorCode: number;
+}
+
+// interface ResServ {
+//     status: StatusCode,
+//     data: DataSucRes | DataFailedRes,
+// }
+
+interface ResSucc {
+    status: StatusCode.SUCCESS,
+    data: DataSucRes,
+}
+
+interface ResFailed {
+    status: StatusCode.FAILED,
+    data: DataFailedRes,
+}

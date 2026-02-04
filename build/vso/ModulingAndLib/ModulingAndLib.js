@@ -1,0 +1,14 @@
+"use strict";
+//////////////////////////////////////
+//Namespaces and reference
+//////////////////////////////////////
+Object.defineProperty(exports, "__esModule", { value: true });
+// namespace A {
+//     export const a = 5;
+//     export interface B {
+//         c: number
+//     }
+// }
+//////////////////////////////////////
+//Модульность на backend
+//////////////////////////////////////

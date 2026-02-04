@@ -1,0 +1,97 @@
+/* Запрос */
+
+
+
+
+
+{
+	"topicId": 5,
+	"status": "published" // "draft", "deleted"
+}
+/* Ответ */
+
+
+
+[
+	{
+		"question": "Как осуществляется доставка?",
+		"answer": "быстро!",
+		"tags": [
+			"popular",
+			"new"
+		],
+		"likes": 3,
+		"status": "published"
+	}
+]
+
+
+
+/* 
+async function getFaqs(req) {
+	const res = await fetch('/faqs', {
+		method: 'POST',
+		body: JSON.stringify(req)
+	});
+	const data = await res.json();
+	return data;
+}
+/*
+
+
+
+
+//Типизация функции (задание из теста 2)
+
+
+// enum StatFaqs {
+//     PUBLISHED ="published" ,
+//     DRAFT = "draft",
+//     DELETED = "deleted",
+// }
+
+// type ReqUser = {
+//     topicId: number,
+//     status: StatFaqs
+// }
+
+// type serverResponse = {
+// 	question: string,
+// 	answer: string,
+//     tags: string[],
+//     likes: number,
+//     status: StatFaqs
+
+//  } 
+
+
+
+// async function getFaqs(req: ReqUser): Promise<serverResponse[]> {
+//     const res = await fetch('./faqs', {
+//         method: 'POST',
+//         body: JSON.stringify(req)
+//     })
+//     const data = await res.json();
+//     return data;
+// }
+
+// // /* Ответ */
+
+
+// //  type serverResponse = {
+// // 	question: string,
+// // 	answer: string
+// //  }
+
+// // [
+// // 	{
+// // 		"question": "Как осуществляется доставка?",
+// // 		"answer": "быстро!",
+// // 		"tags": [
+// // 			"popular",
+// // 			"new"
+// // 		],
+// // 		"likes": 3,
+// // 		"status": "published"
+// // 	}
+// // ]

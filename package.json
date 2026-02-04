@@ -1,0 +1,28 @@
+{
+  "name": "typescritp-demo-1",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/weare66/typescript-demo#readme",
+  "bugs": {
+    "url": "https://github.com/weare66/typescript-demo/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weare66/typescript-demo.git"
+  },
+  "license": "ISC",
+  "author": "Weare66",
+  "type": "commonjs",
+  "main": "App.js",
+  "types": "./App.d.ts",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "really-relaxed-json": "^0.3.2",
+    "reflect-metadata": "^0.2.2"
+  }
+}
